@@ -35,7 +35,7 @@ header h2 {
 
 /* Create three unequal columns that floats next to each other */
 .column {
-    background-image: url(hat.jpg);
+    background-image: url("assets/images/hat.jpg");
     float: left;
     padding: 10px;
     height: 500px;
@@ -49,7 +49,7 @@ header h2 {
 
 /* Middle column */
 .column.middle {
-    background-image: url("map.jpg");
+    background-image: url("assets/images/map.jpg");
     width: 60%;
 }
 
