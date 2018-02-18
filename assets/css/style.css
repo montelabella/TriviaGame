@@ -35,7 +35,11 @@ header h2 {
 
 
 .column {
+<<<<<<< HEAD
     background-image: url("assets/images.hat.jpg");
+=======
+    background-image: url("assets/images/hat.jpg");
+>>>>>>> 177612f42fdf2a11cce4f9bd0f97b3de26dead14
     float: left;
     padding: 10px;
     height: 500px;
