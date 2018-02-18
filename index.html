@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    
+<title>Indiana Jones</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="assets/javascript/app.js"></script>
 </head>
 
 <body>
 
 
-    <div class="header">
-        <h2>Indiana Jones Trivia!</h2>
-    </div>
-    <div class="btnContainer">0
-        <button type="button" class="btn btn-default btn-large btn-primary start">START</button>
-    </div>
 
-    <div class="row">
-        <div class="column side" style="background-color:#aaa;">Column</div>
-        <div class="column middle" style="background-color:#bbb;">Column</div>
-        <div class="column side" style="background-color:#ccc;">Column</div>
-    </div>
+<div class="header">
+  <h2>Indiana Jones Trivia!</h2>
+</div>
+<div class="btnContainer">
+                <button type="button" class="waves-effect waves-light btn-large btn-flat tooltipped" id="start">START</button>
+            </div>
 
-    <div class="footer">
-        <p>Creator: Crystal Hughes</p>
-    </div>
+<div class="row">
+  <div class="column side" style="background-color:black;"><h1 class="rules">The Rules</h1>
+			<p class="rules">There are 5 questions, you have 50 seconds to answer all 5 questions.</p></div>
+  <div class="column middle" style="background-color:#bbb;">
+  	<div id="quiz"></div>
+  	<button id="submit">Submit Quiz</button>
+  </div>
+  <div class="column side" style="background-color:#ccc;">
+  	<div id="results">Results</div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Creator: Crystal Hughes</p>
+</div>
+
 </body>
-
-</body>
-
-</html>
-
 </html>

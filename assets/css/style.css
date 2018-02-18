@@ -1,0 +1,80 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+h2 {
+    font-family: "myWebFont"
+    color: orange;
+    }
+.results {
+    color: white;
+   }     
+
+/* Style the header */
+header h2 {
+    color: white;
+}
+
+.rules {
+    color: White;
+}
+.header {
+    background: linear-gradient(to right, black , red);
+    padding: 10px;
+    text-align: center;
+    font-size: 30px;
+}
+.btnContainer {
+    padding: 15px;
+    text-align: center;
+    background-color: black;
+    }
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    background-image: url(hat.jpg);
+    float: left;
+    padding: 10px;
+    height: 500px;
+     /* Should be removed. Only for demonstration */
+}
+
+/* Left and right column */
+.column.side {
+    width: 20%;
+}
+
+/* Middle column */
+.column.middle {
+    background-image: url("map.jpg");
+    width: 60%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the footer */
+.footer {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+}
+@font-face {
+    color: white;
+    font-family: "myWebFont";
+    src:url(<a href="https://fontmeme.com/indiana-jones-font/"><img src="https://fontmeme.com/permalink/180215/e08d1ea176a16e28bb35b7b850fc062c.png" alt="indiana-jones-font" border="0"></a>);
+}
