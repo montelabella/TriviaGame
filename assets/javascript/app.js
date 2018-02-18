@@ -1,152 +1,137 @@
+var startScreen;
+var gameHTML;
+var counter = 30;
+var questionArray = ["What actor played the character Indiana Jones?", "What is Indiana Jones afraid of?", "What is Indiana's real name?", "Indy's father is played by which famous actor?", "Which Indiana Jones movie had a mine-cart chase?", "Which film is this quote from? 'Throw me the idol, I throw you the whip."];
+var answerArray = ["Brad Pitt", "Harrison Ford","Obi Wan Kenobi","Sean Connery"];
+//I keep getting unexpected string----- i gave up. i suck at coding no matter how many hours i invest
 
-window.onload = (function() {
-    //  Global Variables
-    var time = 20;
-    var questions;
-    var answers;
-    var setIntervalID;
-    var place = 0
-    
-    const quizContainer = document.getElementById('quiz');
-    const resultsContainer = document.getElementById('results');
-    const submitButton = document.getElementById('submit');
-    
-    
-    
-    
-    
-    var questions = [
-    {
-        question: "What actor played the character Indiana Jones?", 
-        answer: ["Brad Pitt", "Harrison Ford","Obi Wan Kenobi","Sean Connery"],
-        correct: "Harrison Ford"
-    
-    },
-    {
-        question: "What is Indiana Jones afraid of?", 
-        answer: ["Scorpians", "Mice", "Snakes", "Nothing"],
-        correct: "Snakes"
-    },
-    {
-        question: "What is Indiana's real name?", 
-        answer: ["Henry Jones, Jr.", "Robert Jones","John Jones, Jr.","Indiana Jones"],
-        correct: "Henry Jones Jr."
-    
-    },
-    {
-        question: "Indy's father is played by which famous actor?", 
-        answer: ["Christopher Lloyd", "Michael Caine","James Bond","Sean Connery"],
-        correct: "Sean Connery"
-    
-    },
-    {
-        question: "Which Indiana Jones movie had a mine-cart chase?", 
-        answer: ["Temple of Doom", "The Crystal Skull","Raiders of The Lost Ark","The Last Crusade"],
-        correct: "Temple of Doom"
-    
-    },
-    {
-        question: "Which film is this quote from? 'Throw me the idol, I throw you the whip.'", 
-        answer: ["Temple of Doom", "The Crystal Skull","Raiders of The Lost Ark","The Last Crusade"],
-        correct: "Raiders of The Lost Ark"
-    
-    }
-    ]; 
-    console.log(questions[place].question);
-    console.log(questions[0].answer[1])
-    
-    function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
-    
-        function showQuestions(questions, quizContainer){
-            var output = [];
-        var answers;
-        for(var i=0; i<questions.length; i++){
-            answers = [];
-            for(letter in questions[i].answers){
-                //radio button
-                answers.push(
-                    '<label>'
-                        + '<input type="radio" name="question'+i+'" value="'+letter+'">'
-                        + letter + ': '
-                        + questions[i].answers[letter]
-                    + '</label>'
-                );
-            }
-        } //adds questions/answers to output
-            output.push(
-                '<div class="question">' + questions[i].question + '</div>'
-                + '<div class="answers">' + answers.join('') + '</div>'
-            );
-        }//outputs to html
-            quizContainer.innerHTML = output.join('');
-    }
-    
-    
-        function showResults(questions, quizContainer, resultsContainer){
-            //get answers from quiz
-            var answerContainers = quizContainer.querySelectorAll('.answers');
-            //users answers
-            var userAnswer = '';
-            var numCorrect = 0;
-            for(var i=0; i<questions.length; i++){
-                //i did not create this code, i borrowed it after trying to find out how to show results/ i am not
-                //i understand this piece much.
-                
-                userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-            //if correct
-            if(userAnswer===questions[i].correctAnswer){
-                numCorrect++;
-                    answerContainers[i].style.color = 'green';
-            }
-            else{
-                answerContainers[i].stylecolor = 'red';
-            }
-        }
-    resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
-    }
-        // show the questions
-        showQuestions(questions, quizContainer);
-    
-        // when user clicks submit, show results
-        submitButton.onclick = function(){
-            showResults(questions, quizContainer, resultsContainer);
-        }
-    }
-    
-    
-    //array square brackets
-    //object .
-    
-    //functions
-    function timeCount() {
-        time--
-        place++
-    
-        //console.log(time);
-        
-    
-    
-    
-    
-    
-    
-    
-    //submitButton.addEventListener('click', showResults);
-    //questions//
-    //function question1() {
-        setintervalId = setInterval(timeCount,1000);)}
-        //console.log(time);
-       // console.log(setintervalId)
-    
-    
-    
-    
-    
-    
-       // $("#start").on('click',function () {
-         //   $("#start").remove();
-           // question1();
-    
-            /// what did i break here?  button no longer disappears//
-           //console.log('working');
-        
+//["Scorpians", "Mice", "Snakes", "Nothing"],
+ //["Henry Jones, Jr.", "Robert Jones","John Jones, Jr.","Indiana Jones"],
+//  ["Christopher Lloyd", "Michael Caine","James Bond","Sean Connery"],
+ //  ["Temple of Doom", "The Crystal Skull","Raiders of The Lost Ark","The Last Crusade"],
+  // ["Temple of Doom", "The Crystal Skull","Raiders of The Lost Ark","The Last Crusade"];
+
+var correctAnswers = ["B. Harrison Ford", "C. Snakes", "A. Henry Jones Jr.", "D. Sean Connery", "A. Temple of Doom", "C. Raiders of The Lost Ark"];
+var questionCounter = 0;
+var selecterAnswer;
+var theClock;
+var correctTally = 0;
+var incorrectTally = 0;
+var unansweredTally = 0;
+
+
+
+
+
+
+
+$(document).ready(function() {
+
+
+function initialScreen() {
+	startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
+	$(".mainArea").html(startScreen);
+}
+
+initialScreen();
+
+
+
+$("body").on("click", ".start-button", function(event){
+	event.preventDefault();  
+	generateHTML();
+
+	timerWrapper();
+
+}); 
+
+$("body").on("click", ".answer", function(event){
+	
+	selectedAnswer = $(this).text();
+	if(selectedAnswer === correctAnswers[questionCounter]) {
+		//alert("correct");
+
+		clearInterval(theClock);
+		generateWin();
+	}
+	else {
+		//alert("wrong answer!");
+		clearInterval(theClock);
+		generateLoss();
+	}
+}); 
+
+$("body").on("click", ".reset-button", function(event){
+	resetGame();
+}); 
+
+});  
+
+//my tutor helped with all of the below!!!!!  
+	unansweredTally++;
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>You ran out of time!  The correct answer was: " + correctAnswers[questionCounter];
+	$(".mainArea").html(gameHTML);
+	setTimeout(wait, 4000);  
+
+
+function generateWin() {
+	correctTally++;
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Correct! The answer is: " + correctAnswers[questionCounter] + "</p>" + imageArray[questionCounter];
+	$(".mainArea").html(gameHTML);
+	setTimeout(wait, 4000);  
+}
+
+function generateLoss() {
+	incorrectTally++;
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Wrong! The correct answer is: "+ correctAnswers[questionCounter];
+	$(".mainArea").html(gameHTML);
+	setTimeout(wait, 4000); 
+}
+
+function generateHTML() {
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>30</span></p><p class='text-center'>" + questionArray[questionCounter] + "</p><p class='first-answer answer'>A. " + answerArray[questionCounter][0] + "</p><p class='answer'>B. "+answerArray[questionCounter][1]+"</p><p class='answer'>C. "+answerArray[questionCounter][2]+"</p><p class='answer'>D. "+answerArray[questionCounter][3]+"</p>";
+	$(".mainArea").html(gameHTML);
+}
+
+function wait() {
+	if (questionCounter < 7) {
+	questionCounter++;
+	generateHTML();
+	counter = 30;
+	timerWrapper();
+	}
+	else {
+		finalScreen();
+	}
+}
+
+function timerWrapper() {
+	theClock = setInterval(thirtySeconds, 1000);
+	function thirtySeconds() {
+		if (counter === 0) {
+			clearInterval(theClock);
+			generateLossDueToTimeOut();
+		}
+		if (counter > 0) {
+			counter--;
+		}
+		$(".timer").html(counter);
+	}
+}
+
+function finalScreen() {
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>All done, here's how you did!" + "</p>" + "<p class='summary-correct'>Correct Answers: " + correctTally + "</p>" + "<p>Wrong Answers: " + incorrectTally + "</p>" + "<p>Unanswered: " + unansweredTally + "</p>" + "<p class='text-center reset-button-container'><a class='btn btn-primary btn-lg btn-block reset-button' href='#' role='button'>Reset The Quiz!</a></p>";
+	$(".mainArea").html(gameHTML);
+}
+
+function resetGame() {
+	questionCounter = 0;
+	correctTally = 0;
+	incorrectTally = 0;
+	unansweredTally = 0;
+	counter = 30;
+	generateHTML();
+	timerWrapper();
+}
+
+
