@@ -13,7 +13,7 @@ h2 {
     color: white;
    }     
 
-/* Style the header */
+
 header h2 {
     color: white;
 }
@@ -33,13 +33,13 @@ header h2 {
     background-color: black;
     }
 
-/* Create three unequal columns that floats next to each other */
+
 .column {
-    background-image: url(hat.jpg);
+    background-image: url("assets/images.hat.jpg");
     float: left;
     padding: 10px;
     height: 500px;
-     /* Should be removed. Only for demonstration */
+    
 }
 
 /* Left and right column */
@@ -49,25 +49,25 @@ header h2 {
 
 /* Middle column */
 .column.middle {
-    background-image: url("map.jpg");
+    background-image: url("assets/images/map.jpg");
     width: 60%;
 }
 
-/* Clear floats after the columns */
+
 .row:after {
     content: "";
     display: table;
     clear: both;
 }
 
-/* Style the footer */
+
 .footer {
     background-color: black;
     padding: 10px;
     text-align: center;
 }
 
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+
 @media (max-width: 600px) {
     .column.side, .column.middle {
         width: 100%;
